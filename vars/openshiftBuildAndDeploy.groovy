@@ -46,7 +46,9 @@ def call(Map pipelineParameters) {
                   dc.rollout().latest()
                }
 
+               dc = openshift.selector( "dc/${pipelineParameters.appName}")
                def deployment = dc.object()
+               echo "Deployment: ${deployment}"
                deployment.metadata.labels['current-version'] = version
                openshift.apply(deployment)
 

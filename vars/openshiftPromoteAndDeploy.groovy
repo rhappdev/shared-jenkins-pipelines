@@ -22,12 +22,20 @@ def call(Map pipelineParameters) {
                   dc.rollout().latest()
                }
 
+               dc = openshift.selector( "dc/${pipelineParameters.appName}")
                def deployment = dc.object()
                deployment.metadata.labels['current-version'] = version
                openshift.apply(deployment)
 
                echo "Application deployment has been rolled out"
-               // TODO add deployment verification
+               
+               echo "Application deployment has been rolled out"
+               def dcObj = dc.object()
+               def podSelector = openshift.selector('pod', [deployment: "${pipelineParameters.appName}-${dcObj.status.latestVersion}"])
+               podSelector.untilEach {
+                  echo "VERIFY pod: ${it.name()}"
+                  return it.object().status.containerStatuses[0].ready
+               }
             }
          }
       }
@@ -37,13 +45,13 @@ def call(Map pipelineParameters) {
      gitBranch: pipelineParameters.gitBranch, 
      gitCredentials: pipelineParameters.gitCredentials, 
      gitUrl: pipelineParameters.gitUrl,
-     buildProject: pipelineParameters.buildProject
+     buildProject: pipelineParameters.promotedProject,
      appName: pipelineParameters.appName, 
-     environment: pipelineParameters.deployTag)
+     environment: pipelineParameters.promotedTag)
 
    runTests(
      strategy: pipelineParameters.testStrategy, 
-     environment: pipelineParameters.deployTag, 
+     environment: pipelineParameters.promotedTag, 
      gitBranch: pipelineParameters.gitBranch, 
      gitCredentials: pipelineParameters.gitCredentials, 
      gitUrl: pipelineParameters.gitUrl)

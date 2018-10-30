@@ -14,6 +14,9 @@ def call(Map pipelineParameters) {
       // Deploy from test to uat
       openshiftPromoteAndDeploy(
         appName: pipelineParameters.appName,
+        gitBranch: pipelineParameters.gitBranch,
+        gitCredentials: pipelineParameters.gitCredentials,
+        gitUrl: pipelineParameters.gitUrl,
         promotedProject: pipelineParameters.uatProject,
         deployTag: 'test',
         buildProject: pipelineParameters.buildProject,
@@ -28,6 +31,9 @@ def call(Map pipelineParameters) {
 
       openshiftPromoteAndDeploy(
         appName: pipelineParameters.appName,
+        gitBranch: pipelineParameters.gitBranch,
+        gitCredentials: pipelineParameters.gitCredentials,
+        gitUrl: pipelineParameters.gitUrl,
         promotedProject: pipelineParameters.prodProject,
         deployTag: 'uat',
         buildProject: pipelineParameters.uatProject,
