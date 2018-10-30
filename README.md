@@ -16,11 +16,13 @@ Pipeline templates using [Shared Libraries](https://jenkins.io/doc/book/pipeline
    - Credentials: <if needed add your credentials to access the repo>
    - Click "Save" button.
 
+## TIPS
+ - Permissions are needed for all the projects where jenkins is creating apps, ... : oc policy add-role-to-user edit system:serviceaccount:<jenkins-project>:jenkins -n <project>
 ## Project Examples
  - [Node.js](https://github.com/redhat-mobile-consulting/nodejs-template)
  - Springboot
  
-### Dependencies
+## Dependencies
 
 This templates requires the following plugins to work:
 
