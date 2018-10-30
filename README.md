@@ -17,7 +17,7 @@ Pipeline templates using [Shared Libraries](https://jenkins.io/doc/book/pipeline
    - Click "Save" button.
 
 ## Project Examples
- - Node.js
+ - [Node.js](https://github.com/redhat-mobile-consulting/nodejs-template)
  - Springboot
  
 ### Dependencies
