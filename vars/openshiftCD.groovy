@@ -29,6 +29,14 @@ def call(Map pipelineParameters) {
          }
       }
 
+      def deploymentStrategy
+      node () {
+         stage ("Deployment Strategy: from ${pipelineParameters.uatProject} to PROD project") {
+            deploymentStrategy = input message: "Enter deployment strategy",
+                    parameters: [choice(name: 'Deployment', choices:  'default\nBlue/Green')]
+         }
+      }
+
       openshiftPromoteAndDeploy(
         appName: pipelineParameters.appName,
         gitBranch: pipelineParameters.gitBranch,
@@ -38,6 +46,7 @@ def call(Map pipelineParameters) {
         deployTag: 'uat',
         buildProject: pipelineParameters.uatProject,
         promotedTag: 'prod',
-        testStrategy: pipelineParameters.testStrategy)
+        testStrategy: pipelineParameters.testStrategy,
+        deploymentStrategy: deploymentStrategy)
    }
 }
