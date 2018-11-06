@@ -1,4 +1,23 @@
 # Architecture
+
+##Index 
+
+- [Architecture](#architecture)
+  * [Pipeline Definition](#pipeline-definition)
+    + [javaFullPipeline](#javafullpipeline)
+    + [npmFullPipeline](#npmfullpipeline)
+    + [javaLibraryPipeline](#javalibrarypipeline)
+    + [npmLibraryPipeline](#npmlibrarypipeline)
+    + [Templates](#templates)
+      - [CI Pipeline](#ci-pipeline)
+        * [mavenCI](#mavenci)
+        * [npmCI](#npmci)
+      - [CD Pipeline](#cd-pipeline)
+        * [openshiftBuildAndDeploy](#openshiftbuildanddeploy)
+        * [setConfiguration](#setconfiguration)
+        * [runTests](#runtests)
+        * [openshiftPromoteAndDeploy](#openshiftpromoteanddeploy)
+        
 ## Pipeline Definition
 The pipelines have been developed to be reusable across them. openshiftCD will be composed of the following pipeline templates:
 ![Full Pipeline](https://github.com/rhappdev/assets/blob/master/architecture/full_pipeline.png)
