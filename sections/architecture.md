@@ -1,6 +1,6 @@
 # Architecture
 
-##Index 
+## Index 
 
 - [Architecture](#architecture)
   * [Pipeline Definition](#pipeline-definition)
@@ -17,7 +17,7 @@
         * [setConfiguration](#setconfiguration)
         * [runTests](#runtests)
         * [openshiftPromoteAndDeploy](#openshiftpromoteanddeploy)
-        
+
 ## Pipeline Definition
 The pipelines have been developed to be reusable across them. openshiftCD will be composed of the following pipeline templates:
 ![Full Pipeline](https://github.com/rhappdev/assets/blob/master/architecture/full_pipeline.png)
