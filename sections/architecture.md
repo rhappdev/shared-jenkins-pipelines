@@ -60,17 +60,19 @@ If we want to have a good way to administrate the pipelines, we need to store th
 ##### mavenCI
 Maven CI pipeline for Java projects.
 ![mavenCI](https://github.com/rhappdev/assets/blob/master/architecture/mavenCI.png)
+
 | Name          | Description   | Example |  Required |
 | ------------- |:-------------:| -------| :-------: |
 | appName      | Application name | nodejs | Yes |
-| gitUrl      | Application git URL      |   https://github.com/rhappdev/nodejs-template.git | Yes |
-| gitBranch | Desired branch to checkout      |   master| Yes |
+| gitUrl      | Application git URL | https://github.com/rhappdev/nodejs-template.git | Yes |
+| gitBranch | Desired branch to checkout      | master | Yes |
 | gitCredentials      | Jenkins credential id needed to access the repository | gitlab-credentials | Yes |
 | buildProject      | Openshift namespace | test | Optional |
 
 ##### npmCI
 Javascript CI pipeline for javascript projects.
 ![mavenCI](https://github.com/rhappdev/assets/blob/master/architecture/npmCI.png)
+
 | Name          | Description   | Example |  Required |
 | ------------- |:-------------:| -------| :-------: |
 | appName      | Application name | nodejs | Yes |
@@ -83,6 +85,7 @@ Javascript CI pipeline for javascript projects.
 #### CD Pipeline
 At this stage, we are going to run openshift, create images, push them to the registry and promote them between environments.
 ![openshiftCD Components](https://github.com/rhappdev/assets/blob/master/architecture/openshiftCD-components.png)
+
 ##### openshiftBuildAndDeploy
 | Name          | Description   | Example |  Required |
 | ------------- |:-------------:| -------| :-------: |
