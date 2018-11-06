@@ -23,6 +23,7 @@ The shared pipeline templates can bee seen as a small pieces that can be used al
 ## Sections
 - [Setup](sections/setup.md)
 - [Architecture](sections/architecture.md)
+- [Create Custom Jenkins image in Openshift](https://github.com/rhappdev/custom-jenkins-image)
 
 ## Project Examples
  - [Node.js](https://github.com/rhappdev/springboot-template)
