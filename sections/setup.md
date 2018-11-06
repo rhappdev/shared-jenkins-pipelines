@@ -1,5 +1,13 @@
-## Setup
-### Jenkins
+# Setup
+
+## Index
+
+- [Setup](#setup)
+  * [Jenkins](#jenkins)
+  * [Openshift Pipeline Build](#openshift-pipeline-build)
+  * [Jenkinsfile](#jenkinsfile)
+
+## Jenkins
 1. Manage Jenkins
 ![Manage Logo](https://github.com/rhappdev/assets/blob/master/shared_pipelines/manage_jenkins.png)
 2. Configure System
@@ -15,7 +23,7 @@
    - Credentials: <if needed add your credentials to access the repo>
    - Click "Save" button.
 
-### Openshift Pipeline Build
+## Openshift Pipeline Build
 A Jenkins pipeline build is a build strategy that includes a mechanism to trigger a Jenkins build from within OpenShift via an API call. The build logic resides in Jenkins.
 Using the Openshift CLI type the following:
 ```
@@ -27,7 +35,7 @@ As you notice, ```oc new-build``` uses ```--strategy=pipeline```, this means tha
 oc env bc/springboot-develop APP_NAME=springboot GIT_BRANCH="develop" GIT_CREDENTIALS=<credentials> GIT_URL=<repo> BUILD_PROJECT=<dev-project> BASE_IMAGE=redhat-openjdk8-openshift:1.2 BUILD_TAG='latest' DEPLOY_TAG='dev' STRATEGY='postman' -n <jenkinsProject>
 ```
 
-### Jenkinsfile
+## Jenkinsfile
 Pipeline templates can be used with ```@Library('pipelines')``` and then use one of the templates available
 ```
 @Library('pipelines') _
