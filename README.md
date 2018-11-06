@@ -2,6 +2,16 @@
 
 Pipeline templates using [Shared Libraries](https://jenkins.io/doc/book/pipeline/shared-libraries/) from [Jenkins Pipeline Plugin](https://wiki.jenkins.io/display/JENKINS/Pipeline+Plugin)
 
+## Index 
+
+- [Shared pipeline templates](#shared-pipeline-templates)
+  * [About](#about)
+  * [Sections](#sections)
+    + [Project Examples](#project-examples)
+    + [Dependencies](#dependencies)
+  * [TODO](#todo)
+  * [Thanks to](#thanks-to)
+  
 ## About
 We are going to cover and explain the pipeline templates made by the Application Development Center of Excellence.
 The pipelines are used with the Jenkins PiPipelines are going to be used with [Shared Libraries](https://jenkins.io/doc/book/pipeline/shared-libraries/). This allows to reuse the pipelines across projects and have them controlled in our git repository.
