@@ -48,9 +48,6 @@ def call(Map pipelineParameters) {
                def releaseVersion = pom.version.replace("-SNAPSHOT", "-${BUILD_NUMBER}")
                variables.save("BUILD_VERSION", releaseVersion)
             }
-
-	    }
-
       }
    }
 
