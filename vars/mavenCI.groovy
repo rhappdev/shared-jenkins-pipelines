@@ -38,8 +38,6 @@ def call(Map pipelineParameters) {
     
          stage("Maven deploy") {
                variables.save("BUILD_VERSION", developmentVersion)
-            }
-
          }
 
       } else  {
