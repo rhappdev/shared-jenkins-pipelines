@@ -11,7 +11,7 @@ def call(Map pipelineParameters) {
       }
 
       stage("Build the Project") {
-         sh 'mvn -s $MAVEN_SETTINGS clean package -DskipTests=true'
+         sh 'mvn clean package -DskipTests=true'
 
          if (pipelineParameters.buildProject) {
             // in case we had a build project, it means we need to save the target
@@ -23,7 +23,7 @@ def call(Map pipelineParameters) {
       stage('Test & QA') {
          parallel (
             'Unit testing': {
-               sh 'mvn -s $MAVEN_SETTINGS test -DskipTests=true'
+               sh 'mvn test -DskipTests=true'
             },
             'Static Analysis': {
                echo "TODO:Sonar"  
