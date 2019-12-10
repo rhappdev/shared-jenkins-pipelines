@@ -4,10 +4,15 @@ def call(Map pipelineParameters) {
 
         echo "Executing CI for application ${pipelineParameters.appName}: Git server (${pipelineParameters.gitUrl}) and branch (${pipelineParameters.gitBranch})"
 
+        def gitRepo = pipelineParameters.gitUrl
+        echo "gitRepo = ${gitRepo}"
+        def splitURL = gitRepo.split('://') // strip out a ssh:// or http(s):// url prefix for later use when pushing tags
+        def rawGitRepo = splitURL[1]
+        echo "rawGitRepo = ${rawGitRepo}"
+        
         stage("Clone application sources") {
             sh "git config --global credential.helper 'cache --timeout 7200'"
-            git branch: pipelineParameters.gitBranch, credentialsId: pipelineParameters.gitCredentials, url: pipelineParameters.gitUrl
-
+            git branch: pipelineParameters.gitBranch, credentialsId: pipelineParameters.gitCredentials, url: gitRepo
         }
 
         stage("Build the Project") {
@@ -45,14 +50,15 @@ def call(Map pipelineParameters) {
         if (pipelineParameters.gitBranch == 'master' || pipelineParameters.gitBranch.startsWith('hotfix')) {
 
             stage("Git tag") {
-
+                withCredentials([usernamePassword(credentialsId: pipelineParameters.gitCredentials, usernameVariable: 'username', passwordVariable: 'password')]){
+                    sh "git config --global user.name jenkins"
                     sh "git config --global user.email jenkins@jenkins.com"
                     sh "npm --no-git-tag-version version ${versionRelease}"
                     sh "git commit -am '[Jenkins] prepare release ${versionRelease}'"
-                    sh "git push origin master"
+                    sh "git push https://${username}:${password}@${rawGitRepo} master"
                     sh "git tag ${versionRelease} -m '${versionRelease}'"
-                    sh "git push origin ${versionRelease}"
-                     
+                    sh "git push https://${username}:${password}@${rawGitRepo} ${versionRelease}"
+                }
             }
 
             // With nodejs - v4.6.2 not working, need to upgrade to read .npmrc file.
@@ -69,9 +75,11 @@ def call(Map pipelineParameters) {
             
 
             stage("Git release") {
+                withCredentials([usernamePassword(credentialsId: pipelineParameters.gitCredentials, usernameVariable: 'username', passwordVariable: 'password')]){
                     sh "npm --no-git-tag-version version ${version}"
                     sh "git commit -am '[Jenkins] prepare for next development iteration'"
-                    sh "git push origin master"
+                    sh "git push https://${username}:${password}@${rawGitRepo} master"
+                }
             }
         } else {
             // With nodejs - v4.6.2 not working, need to upgrade to read .npmrc file.
